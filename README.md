@@ -50,7 +50,7 @@ You will be required to provide a demo to the instructor. The client-server appl
 Your code will be expected to deal with invalid user commands. You will turn in binaries and source code of your client and server programs at the time of the demo. 
 
 Plot two graphs of the latency (mean server response time) versus number of clients for the netstat and current date and time commands.  Increase the number of clients as follows: 1, 5, 10, 20, 30, 40, 50, 60, 70, 75. 
-
+test
 Project #2
 Make your server concurrent by having it spawn a thread/process to handle each client request. 
 
@@ -95,4 +95,4 @@ References
 
 Use the following IEEE standard when listing references:
 [1] Ahuja, Sanjay, P., Quintao, R., and Basavanahally, S., An Empirical Analysis of the Performance of CORBA and Java RMI: Distributed Open Object Architectures for Internet Based Applications, Proceedings of the 2001 International Symposium on Performance Evaluation of Computer and Telecommunication Systems (SPECTS 2001), Orlando, FL, July 2001.
-
+testing 
