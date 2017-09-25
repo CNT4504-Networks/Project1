@@ -1,5 +1,6 @@
+package client;
 
-public class Main {
+public class MainClient {
 
 	public static void main(String args[]) {
 		//Test code please ignore
