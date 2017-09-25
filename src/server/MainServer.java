@@ -17,21 +17,73 @@ public class MainServer {
 		}
 
 		int portNumber = Integer.parseInt(args[0]);
-		
-		try (
-			ServerSocket serverSock = new ServerSocket(portNumber);
-			Socket clientSock = serverSock.accept();
-			PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
-		) {
-			String inputLine, outputLine;
-			
-			
+
+		try (ServerSocket serverSock = new ServerSocket(portNumber);
+				Socket clientSock = serverSock.accept();
+				PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));) {
+			String inputLine;
+
+			// Get client input
+			while ((inputLine = in.readLine()) != null) {
+				out.println(processInput(inputLine));
+			}
 		} catch (IOException e) {
 			System.out.println("Exception caught while trying to listen on port " + portNumber);
 			System.out.println(e.getMessage());
 		}
-		
+
+	}
+
+	private static String processInput(String inputLine) {
+		int selection = Integer.parseInt(inputLine);
+		String outputLine;
+
+		Process process;
+		BufferedReader reader;
+
+		try {
+			switch (selection) {
+			case 1:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			case 2:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			case 3:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			case 4:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			case 5:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			case 6:
+				process = Runtime.getRuntime().exec("uptime");
+				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				outputLine = reader.readLine();
+				break;
+			default:
+				outputLine = "Invalid selection!";
+				break;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return outputLine;
 	}
 
 }
