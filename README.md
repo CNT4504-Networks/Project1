@@ -1,4 +1,4 @@
-﻿Lorenzo is testing git commit
+﻿Lorenzo is testing git commit because he is too cool
 # Project1
 Network Management Application using the Sockets API
 
