@@ -20,6 +20,13 @@ public class MainClient {
 		String hostName = args[0];
 		int portNumber = Integer.parseInt(args[1]);
 		
+		
+		//Testing
+		//String hostName = "127.0.0.1";
+		//int portNumber = 8080;
+		
+		System.out.println("Connecting to server...");
+		
 		try (
 				Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
@@ -29,28 +36,29 @@ public class MainClient {
 			String serverMessage;
 			String clientMessage;
 			
-			//The main program loop
-			while((serverMessage = in.readLine()) != null) {
-				System.out.println("Server: " + serverMessage);
-				
+			//main program loop
+			while(true) {
+				//Get server message
+				while(in.ready()) {
+					serverMessage = in.readLine();
+					System.out.println("Server: " + serverMessage);
+				}//end while
+
 				displayMenu();
 				
 				clientMessage = stdIn.readLine();
-				if (clientMessage != null) {
-					//Check if we are quitting
-					if(clientMessage.equals("7")) {
-						System.out.println("Goodbye!");
-						System.exit(0);
-					}//end if (exit check)
-					
-					System.out.println("Client: " + clientMessage);
+				if(clientMessage != null) {
 					out.println(clientMessage);
-				}//end if (client message)
-			}//end while
+					if(clientMessage.equals("7")) {
+						System.exit(0);
+					}
+				}
+			}//end program loop
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
 			System.exit(1);
 		} catch (IOException e) {
+			System.err.print(e.getMessage());
 			System.exit(1);
 		}//end try/catch
 	}//end Main
