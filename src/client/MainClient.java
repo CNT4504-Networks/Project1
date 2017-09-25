@@ -24,25 +24,46 @@ public class MainClient {
 				Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));	
-		){
+		) {
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String serverMessage;
 			String clientMessage;
 			
+			//The main program loop
 			while((serverMessage = in.readLine()) != null) {
 				System.out.println("Server: " + serverMessage);
 				
+				displayMenu();
+				
 				clientMessage = stdIn.readLine();
 				if (clientMessage != null) {
+					//Check if we are quitting
+					if(clientMessage.equals("7")) {
+						System.out.println("Goodbye!");
+						System.exit(0);
+					}//end if (exit check)
+					
 					System.out.println("Client: " + clientMessage);
 					out.println(clientMessage);
-				}
-			}
+				}//end if (client message)
+			}//end while
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
 			System.exit(1);
 		} catch (IOException e) {
 			System.exit(1);
-		}
-	}
-}
+		}//end try/catch
+	}//end Main
+	
+	//Display the main menu
+	private static void displayMenu() {
+		System.out.println("Welcome! Please enter your choice from the menu below");
+		System.out.println("1.   Host current Date and Time");
+		System.out.println("2.   Host uptime");
+		System.out.println("3.   Host memory use");
+		System.out.println("4.   Host Netstat");
+		System.out.println("5.   Host current users");
+		System.out.println("6.   Host running processes");
+		System.out.println("7.   Quit");
+	}//end displayMenu
+}//end MainClient
