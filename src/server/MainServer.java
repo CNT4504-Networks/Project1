@@ -50,7 +50,7 @@ public class MainServer {
 		try {
 			switch (selection) {
 			case 1:
-				process = Runtime.getRuntime().exec("notepad.exe");
+				process = Runtime.getRuntime().exec("date");
 				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 				outputLine = reader.readLine();
 				break;

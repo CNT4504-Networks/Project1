@@ -2,3 +2,5 @@
 /client/
 /server/
 /shared/
+/.classpath
+/.project
