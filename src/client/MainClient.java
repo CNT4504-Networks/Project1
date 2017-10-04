@@ -47,7 +47,9 @@ public class MainClient {
 					out.println("[END]");
 					
 					//If client message = 7 just quit
-					System.exit(0);
+					if(clientMessage.equals("7")) {
+						System.exit(0);
+					}
 				}//end if
 			}//end main program loop
 
