@@ -11,50 +11,61 @@ public class MainClient {
 
 	public static void main(String args[]) {
 		// If no hostname provided in command line abort
-		if (args.length != 2) {
+		if (args.length < 2) {
 			System.out.println(args.length);
 			System.out.println("Invalid hostname! Aborting...");
 			System.out.println("Usage: java project1.jar <host name> <port number>");
 			System.exit(1);
 		}
-
+		
+		int index = args.length - 1;
+		
 		String hostName = args[0];
 		int portNumber = Integer.parseInt(args[1]);
 
-		//Connect to the server
+		// Connect to the server
 		System.out.println("Connecting to server...");
 		try (Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-		) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));) {
 
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String serverMessage;
 			String clientMessage;
 
-			//Main program loop
+			// Main program loop
 			while (true) {
 				// Get server message
 				while (!(serverMessage = in.readLine()).equals("[END]")) {
-					if(!serverMessage.equals("null")) {
+					if (!serverMessage.equals("null")) {
 						System.out.println(serverMessage);
 					}
 				} // end while
 
 				displayMenu();
 
-				//Send a message to the server
-				clientMessage = stdIn.readLine();
-				if (clientMessage != null) {
-					out.println(clientMessage);
+				// Send a message to the server
+				if (args.length > 2) {
+					out.println(args[index]);
+					System.out.println("running command: " + (args[index]));
 					out.println("[END]");
-					
-					//If client message = 7 just quit
-					if(clientMessage.equals("7")) {
+					index--;
+					if (index <= 2) {
 						System.exit(0);
 					}
-				}//end if
-			}//end main program loop
+				} else {
+					clientMessage = stdIn.readLine();
+					if (clientMessage != null) {
+						out.println(clientMessage);
+						out.println("[END]");
+
+						// If client message = 7 just quit
+						if (clientMessage.equals("7")) {
+							System.exit(0);
+						}
+					} // end if
+				}
+			} // end main program loop
 
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
