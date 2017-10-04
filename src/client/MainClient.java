@@ -12,6 +12,7 @@ public class MainClient {
 	public static void main(String args[]) {
 		// If no hostname provided in command line abort
 		if (args.length != 2) {
+			System.out.println(args.length);
 			System.out.println("Invalid hostname! Aborting...");
 			System.out.println("Usage: java project1.jar <host name> <port number>");
 			System.exit(1);
