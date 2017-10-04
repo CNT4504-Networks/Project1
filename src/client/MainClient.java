@@ -11,42 +11,40 @@ public class MainClient {
 
 	public static void main(String args[]) {
 		// If no hostname provided in command line abort
-		/*
-		 * if(args.length != 2) {
-		 * System.out.println("Invalid hostname! Aborting..."); System.out.
-		 * println("Usage: java project1.jar <host name> <port number>");
-		 * System.exit(1); }
-		 */
+		if (args.length != 2) {
+			System.out.println("Invalid hostname! Aborting...");
+			System.out.println("Usage: java project1.jar <host name> <port number>");
+			System.exit(1);
+		}
 
-		// String hostName = args[0];
-		// int portNumber = Integer.parseInt(args[1]);
+		String hostName = args[0];
+		int portNumber = Integer.parseInt(args[1]);
 
 		// Testing
-		String hostName = "127.0.0.1";
-		int portNumber = 8080;
+		//String hostName = "127.0.0.1";
+		//int portNumber = 8080;
 
 		System.out.println("Connecting to server...");
 
 		try (Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-		){
-			
+				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));) {
+
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String serverMessage;
 			String clientMessage;
 
 			// Get server message
-			while ((serverMessage = in.readLine()) != null) {
+			while (!(serverMessage = in.readLine()).equals("[END]")) {
 				System.out.println("Server: " + serverMessage);
 			} // end while
 
 			displayMenu();
 
-			
-			clientMessage = stdIn.readLine(); 
-			if(clientMessage != null) {
+			clientMessage = stdIn.readLine();
+			if (clientMessage != null) {
 				out.println(clientMessage);
+				out.print("[END]");
 			}
 
 		} catch (UnknownHostException e) {
@@ -56,7 +54,7 @@ public class MainClient {
 			System.err.print(e.getMessage());
 			System.exit(1);
 		} // end try/catch
-		
+
 		System.exit(0);
 	}// end Main
 
