@@ -58,7 +58,9 @@ public class MainServer {
 		} catch (IOException e) {
 			System.out.println("Exception caught while trying to listen on port " + portNumber);
 			System.out.println(e.getMessage());
-		} // end try/catch
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}// end main
 
 	// Select the command to run
