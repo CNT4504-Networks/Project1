@@ -52,7 +52,8 @@ public class MainServer {
 	private static String processInput(String inputLine) {
 		int selection = Integer.parseInt(inputLine);
 		String outputLine = null;
-
+		String nextLine;
+		
 		Process process;
 		BufferedReader reader;
 
@@ -71,22 +72,30 @@ public class MainServer {
 			case 3:
 				process = Runtime.getRuntime().exec("cat /proc/meminfo");
 				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
+				while((nextLine = reader.readLine()) != null) {
+					outputLine = outputLine + nextLine;
+				}
 				break;
 			case 4:
 				process = Runtime.getRuntime().exec("netstat");
 				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
+				while((nextLine = reader.readLine()) != null) {
+					outputLine = outputLine + nextLine;
+				}
 				break;
 			case 5:
 				process = Runtime.getRuntime().exec("w");
 				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
+				while((nextLine = reader.readLine()) != null) {
+					outputLine = outputLine + nextLine;
+				}
 				break;
 			case 6:
 				process = Runtime.getRuntime().exec("ps -A");
 				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
+				while((nextLine = reader.readLine()) != null) {
+					outputLine = outputLine + nextLine;
+				}
 				break;
 			default:
 				outputLine = "Invalid selection!";
