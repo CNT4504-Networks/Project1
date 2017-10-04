@@ -10,6 +10,7 @@ import java.net.Socket;
 public class MainServer {
 
 	public static void main(String[] args) {
+		//Make sure we have included starting arguments
 		if (args.length != 1) {
 			System.err.println("No port provided. Aborting...");
 			System.err.println("Usage: java projectServer <port number>");
@@ -20,14 +21,13 @@ public class MainServer {
 
 		int portNumber = Integer.parseInt(args[0]);
 
-		// Main program loop
+		//Create the server
 		try (ServerSocket serverSock = new ServerSocket(portNumber);) {
-
+			// Main program loop
 			while (true) {
 				System.out.println("Waiting for client connection...");
 
-				// Listen for client connection
-
+				// Listen for client connection (can only accept 1 at a time)
 				Socket clientSock = serverSock.accept();
 				PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
@@ -38,22 +38,25 @@ public class MainServer {
 				out.println("Connection established.");
 				out.println("[END]");
 
+				//Process user input
 				if (!(inputLine = in.readLine()).equals("[END]")) {
 					System.out.println("Client selected option: " + inputLine);
 					out.println(processInput(inputLine));
 				}
 
+				//Close all open connections
 				System.out.println("Client done talking");
 				out.close();
 				in.close();
 				clientSock.close();
-			}
+			}//end main program loop
 		} catch (IOException e) {
 			System.out.println("Exception caught while trying to listen on port " + portNumber);
 			System.out.println(e.getMessage());
 		} // end try/catch
-	} // end main program loop
+	}//end main
 
+	//Select the command to run
 	private static String processInput(String inputLine) {
 		int selection = Integer.parseInt(inputLine);
 
