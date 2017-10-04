@@ -35,20 +35,22 @@ public class MainClient {
 			String serverMessage;
 			String clientMessage;
 
+			//Main program loop
 			while (true) {
 				// Get server message
 				while (!(serverMessage = in.readLine()).equals("[END]")) {
-					System.out.println("Server: " + serverMessage);
+					System.out.println(serverMessage);
 				} // end while
 
 				displayMenu();
 
 				clientMessage = stdIn.readLine();
 				if (clientMessage != null) {
+					//If client message = 7 just quit
 					out.println(clientMessage);
 					out.println("[END]");
-				}
-			}
+				}//end if
+			}//end main program loop
 
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
