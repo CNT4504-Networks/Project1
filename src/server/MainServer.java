@@ -26,12 +26,22 @@ public class MainServer {
 					Socket clientSock = serverSock.accept();
 					PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
 					BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));) {
-				String inputLine = null;
+				String inputLine, outputLine;
 
 				// notify the client that we have connected
 				System.out.println("Client connected!");
 				out.println("Connection established.");
 				out.println("Hello there!" + "some more text\n even more text");
+				
+				
+				if ((inputLine = in.readLine()) != null) {
+					System.out.println("Client: " + inputLine);
+				} else {
+					in.close();
+				}
+				
+				System.out.println("Client done talking");
+
 				/*
 				 * //Main program loop while((inputLine = in.readLine())!="7") {
 				 * inputLine = in.readLine();

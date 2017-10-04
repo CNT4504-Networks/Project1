@@ -41,13 +41,13 @@ public class MainClient {
 				System.out.println("Server: " + serverMessage);
 			} // end while
 
-			//displayMenu();
+			displayMenu();
 
-			/*
-			 * clientMessage = stdIn.readLine(); if(clientMessage != null) {
-			 * out.println(clientMessage); if(clientMessage.equals("7")) {
-			 * System.exit(0); } }
-			 */
+			
+			clientMessage = stdIn.readLine(); 
+			if(clientMessage != null) {
+				out.println(clientMessage);
+			}
 
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
@@ -56,6 +56,8 @@ public class MainClient {
 			System.err.print(e.getMessage());
 			System.exit(1);
 		} // end try/catch
+		
+		System.exit(0);
 	}// end Main
 
 	// Display the main menu
