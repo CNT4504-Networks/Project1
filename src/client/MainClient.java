@@ -46,7 +46,7 @@ public class MainClient {
 				clientMessage = stdIn.readLine();
 				if (clientMessage != null) {
 					out.println(clientMessage);
-					out.print("[END]");
+					out.println("[END]");
 				}
 			}
 
