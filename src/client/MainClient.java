@@ -36,11 +36,14 @@ public class MainClient {
 			while (true) {
 				// Get server message
 				while (!(serverMessage = in.readLine()).equals("[END]")) {
-					System.out.println(serverMessage);
+					if(!serverMessage.equals("null")) {
+						System.out.println(serverMessage);
+					}
 				} // end while
 
 				displayMenu();
 
+				//Send a message to the server
 				clientMessage = stdIn.readLine();
 				if (clientMessage != null) {
 					out.println(clientMessage);

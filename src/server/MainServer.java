@@ -63,22 +63,20 @@ public class MainServer {
 
 	// Select the command to run
 	private static String processInput(String inputLine) {
-		int selection = Integer.parseInt(inputLine);
-
-		switch (selection) {
-		case 1:
+		switch (inputLine) {
+		case "1":
 			return getOutput("date");
-		case 2:
+		case "2":
 			return getOutput("uptime");
-		case 3:
+		case "3":
 			return getOutput("cat /proc/meminfo");
-		case 4:
+		case "4":
 			return getOutput("netstat");
-		case 5:
+		case "5":
 			return getOutput("w");
-		case 6:
+		case "6":
 			return getOutput("ps -A");
-		case 7:
+		case "7":
 			return "Goodbye!";
 		default:
 			return "Invalid Selection!";
