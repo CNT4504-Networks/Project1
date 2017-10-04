@@ -21,8 +21,8 @@ public class MainClient {
 		int portNumber = Integer.parseInt(args[1]);
 
 		// Testing
-		//String hostName = "127.0.0.1";
-		//int portNumber = 8080;
+		// String hostName = "127.0.0.1";
+		// int portNumber = 8080;
 
 		System.out.println("Connecting to server...");
 
@@ -34,17 +34,19 @@ public class MainClient {
 			String serverMessage;
 			String clientMessage;
 
-			// Get server message
-			while (!(serverMessage = in.readLine()).equals("[END]")) {
-				System.out.println("Server: " + serverMessage);
-			} // end while
+			while (true) {
+				// Get server message
+				while (!(serverMessage = in.readLine()).equals("[END]")) {
+					System.out.println("Server: " + serverMessage);
+				} // end while
 
-			displayMenu();
+				displayMenu();
 
-			clientMessage = stdIn.readLine();
-			if (clientMessage != null) {
-				out.println(clientMessage);
-				out.print("[END]");
+				clientMessage = stdIn.readLine();
+				if (clientMessage != null) {
+					out.println(clientMessage);
+					out.print("[END]");
+				}
 			}
 
 		} catch (UnknownHostException e) {
