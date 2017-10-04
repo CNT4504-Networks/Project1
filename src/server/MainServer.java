@@ -39,7 +39,8 @@ public class MainServer {
 				
 				while (true) {
 					// Process user input
-					if (!(inputLine = in.readLine()).equals("[END]")) {
+					inputLine = in.readLine();
+					if (inputLine != null && !inputLine.equals("[END]")) {
 						System.out.println("Client selected option: " + inputLine);
 						out.println(processInput(inputLine));
 						out.println("[END]");
