@@ -10,60 +10,55 @@ import java.net.UnknownHostException;
 public class MainClient {
 
 	public static void main(String args[]) {
-		//If no hostname provided in command line abort
-		if(args.length != 2) {
-			System.out.println("Invalid hostname! Aborting...");
-			System.out.println("Usage: java project1.jar <host name> <port number>");
-			System.exit(1);
-		}
-		
-		String hostName = args[0];
-		int portNumber = Integer.parseInt(args[1]);
-		
-		
-		//Testing
-		//String hostName = "127.0.0.1";
-		//int portNumber = 8080;
-		
+		// If no hostname provided in command line abort
+		/*
+		 * if(args.length != 2) {
+		 * System.out.println("Invalid hostname! Aborting..."); System.out.
+		 * println("Usage: java project1.jar <host name> <port number>");
+		 * System.exit(1); }
+		 */
+
+		// String hostName = args[0];
+		// int portNumber = Integer.parseInt(args[1]);
+
+		// Testing
+		String hostName = "127.0.0.1";
+		int portNumber = 8080;
+
 		System.out.println("Connecting to server...");
-		
-		try (
-				Socket sock = new Socket(hostName, portNumber);
+
+		try (Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));	
-		) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		){
+			
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String serverMessage;
 			String clientMessage;
-			
-			//main program loop
-			while(true) {
-				//Get server message
-				while(in.ready()) {
-					serverMessage = in.readLine();
-					System.out.println("Server: " + serverMessage);
-				}//end while
 
-				displayMenu();
-				
-				clientMessage = stdIn.readLine();
-				if(clientMessage != null) {
-					out.println(clientMessage);
-					if(clientMessage.equals("7")) {
-						System.exit(0);
-					}
-				}
-			}//end program loop
+			// Get server message
+			while ((serverMessage = in.readLine()) != null) {
+				System.out.println("Server: " + serverMessage);
+			} // end while
+
+			//displayMenu();
+
+			/*
+			 * clientMessage = stdIn.readLine(); if(clientMessage != null) {
+			 * out.println(clientMessage); if(clientMessage.equals("7")) {
+			 * System.exit(0); } }
+			 */
+
 		} catch (UnknownHostException e) {
 			System.err.println("Unable to connect to host at: " + hostName + ":" + portNumber);
 			System.exit(1);
 		} catch (IOException e) {
 			System.err.print(e.getMessage());
 			System.exit(1);
-		}//end try/catch
-	}//end Main
-	
-	//Display the main menu
+		} // end try/catch
+	}// end Main
+
+	// Display the main menu
 	private static void displayMenu() {
 		System.out.println("Welcome! Please enter your choice from the menu below");
 		System.out.println("1.   Host current Date and Time");
@@ -73,5 +68,5 @@ public class MainClient {
 		System.out.println("5.   Host current users");
 		System.out.println("6.   Host running processes");
 		System.out.println("7.   Quit");
-	}//end displayMenu
-}//end MainClient
+	}// end displayMenu
+}// end MainClient
