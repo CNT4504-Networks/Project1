@@ -21,14 +21,16 @@ public class MainServer {
 		int portNumber = Integer.parseInt(args[0]);
 
 		// Main program loop
-		while (true) {
-			System.out.println("Waiting for client connection...");
+		try (ServerSocket serverSock = new ServerSocket(portNumber);) {
 
-			// Listen for client connection
-			try (ServerSocket serverSock = new ServerSocket(portNumber);
-					Socket clientSock = serverSock.accept();
-					PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
-					BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));) {
+			while (true) {
+				System.out.println("Waiting for client connection...");
+
+				// Listen for client connection
+
+				Socket clientSock = serverSock.accept();
+				PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
 				String inputLine;
 
 				// notify the client that we have connected
@@ -42,16 +44,19 @@ public class MainServer {
 				}
 
 				System.out.println("Client done talking");
-			} catch (IOException e) {
-				System.out.println("Exception caught while trying to listen on port " + portNumber);
-				System.out.println(e.getMessage());
-			} // end try/catch
-		} // end main program loop
-	}// end Main
+				out.close();
+				in.close();
+				clientSock.close();
+			}
+		} catch (IOException e) {
+			System.out.println("Exception caught while trying to listen on port " + portNumber);
+			System.out.println(e.getMessage());
+		} // end try/catch
+	} // end main program loop
 
 	private static String processInput(String inputLine) {
 		int selection = Integer.parseInt(inputLine);
-		
+
 		switch (selection) {
 		case 1:
 			return getOutput("date");
@@ -67,7 +72,7 @@ public class MainServer {
 			return getOutput("ps -A");
 		default:
 			return "Invalid Selection!";
-		}//end switch
+		}// end switch
 	}// end processInput
 
 	// Execute the command and get the output
