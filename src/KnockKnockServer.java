@@ -54,13 +54,13 @@ public class KnockKnockServer {
             
             // Initiate conversation with client
             KnockKnockProtocol kkp = new KnockKnockProtocol();
-            outputLine = kkp.processInput(null);
+            outputLine =kkp.displayMenu();
             out.println(outputLine);
 
             while ((inputLine = in.readLine()) != null) {
                 outputLine = kkp.processInput(inputLine);
                 out.println(outputLine);
-                if (outputLine.equals("Bye."))
+                if (outputLine.equals("Invalid selection!"))
                     break;
             }
         } catch (IOException e) {

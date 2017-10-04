@@ -58,7 +58,7 @@ public class KnockKnockClient {
 
             while ((fromServer = in.readLine()) != null) {
                 System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye."))
+                if (fromServer.equals("Invalid selection!"))
                     break;
                 
                 fromUser = stdIn.readLine();
