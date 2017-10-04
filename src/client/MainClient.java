@@ -21,15 +21,12 @@ public class MainClient {
 		String hostName = args[0];
 		int portNumber = Integer.parseInt(args[1]);
 
-		// Testing
-		// String hostName = "127.0.0.1";
-		// int portNumber = 8080;
-
+		//Connect to the server
 		System.out.println("Connecting to server...");
-
 		try (Socket sock = new Socket(hostName, portNumber);
 				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		) {
 
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String serverMessage;

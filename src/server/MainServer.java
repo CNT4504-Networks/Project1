@@ -10,7 +10,7 @@ import java.net.Socket;
 public class MainServer {
 
 	public static void main(String[] args) {
-		//Make sure we have included starting arguments
+		// Make sure we have included starting arguments
 		if (args.length != 1) {
 			System.err.println("No port provided. Aborting...");
 			System.err.println("Usage: java projectServer <port number>");
@@ -21,12 +21,11 @@ public class MainServer {
 
 		int portNumber = Integer.parseInt(args[0]);
 
-		//Create the server
+		// Create the server
 		try (ServerSocket serverSock = new ServerSocket(portNumber);) {
 			// Main program loop
 			while (true) {
 				System.out.println("Waiting for client connection...");
-
 				// Listen for client connection (can only accept 1 at a time)
 				Socket clientSock = serverSock.accept();
 				PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
@@ -37,26 +36,31 @@ public class MainServer {
 				System.out.println("Client connected!");
 				out.println("Connection established.");
 				out.println("[END]");
+				
+				while (true) {
+					// Process user input
+					if (!(inputLine = in.readLine()).equals("[END]")) {
+						System.out.println("Client selected option: " + inputLine);
+						out.println(processInput(inputLine));
+					}
 
-				//Process user input
-				if (!(inputLine = in.readLine()).equals("[END]")) {
-					System.out.println("Client selected option: " + inputLine);
-					out.println(processInput(inputLine));
-				}
-
-				//Close all open connections
-				System.out.println("Client done talking");
-				out.close();
-				in.close();
-				clientSock.close();
-			}//end main program loop
+					// Close all open connections
+					if (inputLine.equals("7")) {
+						System.out.println("Client done talking");
+						out.close();
+						in.close();
+						clientSock.close();
+						break;
+					}//end if
+				}//end client connection loop
+			} // end main program loop
 		} catch (IOException e) {
 			System.out.println("Exception caught while trying to listen on port " + portNumber);
 			System.out.println(e.getMessage());
 		} // end try/catch
-	}//end main
+	}// end main
 
-	//Select the command to run
+	// Select the command to run
 	private static String processInput(String inputLine) {
 		int selection = Integer.parseInt(inputLine);
 
@@ -73,6 +77,8 @@ public class MainServer {
 			return getOutput("w");
 		case 6:
 			return getOutput("ps -A");
+		case 7:
+			return "Goodbye!";
 		default:
 			return "Invalid Selection!";
 		}// end switch
