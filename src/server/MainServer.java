@@ -42,6 +42,7 @@ public class MainServer {
 					if (!(inputLine = in.readLine()).equals("[END]")) {
 						System.out.println("Client selected option: " + inputLine);
 						out.println(processInput(inputLine));
+						out.println("[END]");
 					}
 
 					// Close all open connections
