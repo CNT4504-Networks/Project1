@@ -66,9 +66,10 @@ public class KnockKnockProtocol {
     				outputLine=displayMenu();
     				break;
     			case "1":
-    				process = Runtime.getRuntime().exec("date");
-    				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    				outputLine = reader.readLine();
+    				outputLine="case 1";
+//    				process = Runtime.getRuntime().exec("date");
+//    				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//    				outputLine = reader.readLine();
     				break;
     			case "2":
     				process = Runtime.getRuntime().exec("uptime");
@@ -155,6 +156,6 @@ public String displayMenu() {
 	.append("5.   Host current users\n")
 	.append("6.   Host running processes\n")
 	.append("7.   Quit").toString();
-	return displayOut.toString();
+	return displayOut;
 }//end displayMenu
 }

@@ -51,22 +51,23 @@ public class KnockKnockClient {
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(kkSocket.getInputStream()));
         ) {
-            BufferedReader stdIn =
-                new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
-            String fromUser;
+        	BufferedReader stdIn =
+                    new BufferedReader(new InputStreamReader(System.in));
+                String fromServer;
+                String fromUser;
 
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Invalid selection!"))
-                    break;
-                
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Client: " + fromUser);
-                    out.println(fromUser);
+                while ((fromServer = in.readLine()) != null) {
+                    System.out.println("Server: " + fromServer);
+                    if (fromServer.equals("Bye."))
+                        break;
+                    
+                    fromUser = stdIn.readLine();
+                    while (fromUser != null) {
+                        System.out.println("Client: " + fromUser);
+                        out.println(fromUser);
+                        break;
+                    }
                 }
-            }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
