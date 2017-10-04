@@ -19,12 +19,12 @@ public class MainServer {
 		System.out.println("Starting server...");
 
 		int portNumber = Integer.parseInt(args[0]);
-		
-		//Main program loop
+
+		// Main program loop
 		while (true) {
 			System.out.println("Waiting for client connection...");
-			
-			//Listen for client connection
+
+			// Listen for client connection
 			try (ServerSocket serverSock = new ServerSocket(portNumber);
 					Socket clientSock = serverSock.accept();
 					PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
@@ -35,78 +35,57 @@ public class MainServer {
 				System.out.println("Client connected!");
 				out.println("Connection established.");
 				out.println("[END]");
-				
+
 				if (!(inputLine = in.readLine()).equals("[END]")) {
 					System.out.println("Client selected option: " + inputLine);
 					out.println(processInput(inputLine));
 				}
-				
+
 				System.out.println("Client done talking");
 			} catch (IOException e) {
 				System.out.println("Exception caught while trying to listen on port " + portNumber);
 				System.out.println(e.getMessage());
-			}//end try/catch
-		}//end main program loop
-	}//end Main
+			} // end try/catch
+		} // end main program loop
+	}// end Main
 
 	private static String processInput(String inputLine) {
 		int selection = Integer.parseInt(inputLine);
-		String outputLine = null;
-		String nextLine;
 		
-		Process process;
-		BufferedReader reader;
+		switch (selection) {
+		case 1:
+			return getOutput("date");
+		case 2:
+			return getOutput("uptime");
+		case 3:
+			return getOutput("cat /proc/meminfo");
+		case 4:
+			return getOutput("netstat");
+		case 5:
+			return getOutput("w");
+		case 6:
+			return getOutput("ps -A");
+		default:
+			return "Invalid Selection!";
+		}//end switch
+	}// end processInput
 
+	// Execute the command and get the output
+	private static String getOutput(String command) {
+		String output = null;
+		String nextLine;
+		Process process;
 		try {
-			switch (selection) {
-			case 1:
-				process = Runtime.getRuntime().exec("date");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
-				break;
-			case 2:
-				process = Runtime.getRuntime().exec("uptime");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				outputLine = reader.readLine();
-				break;
-			case 3:
-				process = Runtime.getRuntime().exec("cat /proc/meminfo");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				while((nextLine = reader.readLine()) != null) {
-					outputLine = outputLine + nextLine;
-				}
-				break;
-			case 4:
-				process = Runtime.getRuntime().exec("netstat");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				while((nextLine = reader.readLine()) != null) {
-					outputLine = outputLine + nextLine;
-				}
-				break;
-			case 5:
-				process = Runtime.getRuntime().exec("w");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				while((nextLine = reader.readLine()) != null) {
-					outputLine = outputLine + nextLine;
-				}
-				break;
-			case 6:
-				process = Runtime.getRuntime().exec("ps -A");
-				reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				while((nextLine = reader.readLine()) != null) {
-					outputLine = outputLine + nextLine;
-				}
-				break;
-			default:
-				outputLine = "Invalid selection!";
-				break;
+			process = Runtime.getRuntime().exec(command);
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+			while ((nextLine = reader.readLine()) != null) {
+				output = output + "\n" + nextLine;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		return outputLine;
-	}
-
-}
+		} // end try/catch
+		return output;
+	}// end getInput
+}// end Class MainServer
