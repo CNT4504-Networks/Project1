@@ -13,7 +13,7 @@ public class SimClient {
 		int numClients = Integer.parseInt(args[0]);
 		try {
 			MainClient client = new MainClient();
-			String arguments[] = {"192.168.100.107", "8080", "7", "4", "1"};
+			String arguments[] = {"192.168.100.107", "9000", "7", "4", "1"};
 			client.main(arguments);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

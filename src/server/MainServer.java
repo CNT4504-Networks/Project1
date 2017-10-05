@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MainServer {
+	static String test;
 
 	public static void main(String[] args) {
 		// Make sure we have included starting arguments

@@ -50,7 +50,7 @@ public class MainClient {
 					System.out.println("running command: " + (args[index]));
 					out.println("[END]");
 					index--;
-					if (index <= 2) {
+					if (index < 2) {
 						System.exit(0);
 					}
 				} else {
