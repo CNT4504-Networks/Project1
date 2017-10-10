@@ -51,7 +51,7 @@ public class MainClient {
 					out.println("[END]");
 					index--;
 					if (index < 2) {
-						System.exit(0);
+						break;
 					}
 				} else {
 					clientMessage = stdIn.readLine();
@@ -61,7 +61,7 @@ public class MainClient {
 
 						// If client message = 7 just quit
 						if (clientMessage.equals("7")) {
-							System.exit(0);
+							break;
 						}
 					} // end if
 				}
@@ -74,8 +74,6 @@ public class MainClient {
 			System.err.print(e.getMessage());
 			System.exit(1);
 		} // end try/catch
-
-		System.exit(0);
 	}// end Main
 
 	// Display the main menu
