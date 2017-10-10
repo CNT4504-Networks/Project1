@@ -39,21 +39,23 @@ public class MainServer {
 				out.println("[END]");
 				
 				while (true) {
-					// Process user input
-					inputLine = in.readLine();
-					if (inputLine != null && !inputLine.equals("[END]")) {
-						System.out.println("Client selected option: " + inputLine);
-						out.println(processInput(inputLine));
-						out.println("[END]");
-					}
+					if (in.ready()) {
+						// Process user input
+						inputLine = in.readLine();
+						if (inputLine != null && !inputLine.equals("[END]")) {
+							System.out.println("Client selected option: " + inputLine);
+							out.println(processInput(inputLine));
+							out.println("[END]");
+						}
 
-					// Close all open connections
-					if (inputLine.equals("7")) {
-						System.out.println("Client done talking");
-						out.close();
-						in.close();
-						clientSock.close();
-						break;
+						// Close all open connections
+						if (inputLine.equals("7")) {
+							System.out.println("Client done talking");
+							out.close();
+							in.close();
+							clientSock.close();
+							break;
+						}//end if
 					}//end if
 				}//end client connection loop
 			} // end main program loop
