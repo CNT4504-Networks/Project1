@@ -31,9 +31,7 @@ public class RunSim {
 		for (int i = 0; i < numClients; i++) {
 			
 			threads[i].start();
-			System.out.println("Executing thread: " + i);
 			threads[i].join();
-			System.out.println("Ending thread: " + i);
 			times[i] = time;
 		}
 		
