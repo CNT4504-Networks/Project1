@@ -28,8 +28,11 @@ public class RunSim {
 		
 		//Start and join the clients
 		for (int i = 0; i < numClients; i++) {
+			System.out.println("Starting thread: " + i);
 			threads[i].start();
+			System.out.println("Executing thread: " + i);
 			threads[i].join();
+			System.out.println("Ending thread: " + i);
 			times[i] = time;
 		}
 	}//end main
