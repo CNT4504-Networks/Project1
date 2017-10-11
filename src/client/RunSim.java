@@ -35,13 +35,13 @@ public class RunSim {
 			threads[i].join();
 			System.out.println("Ending thread: " + i);
 			times[i] = time;
-			
-			long avgTime = 0;
-			for (long num : times) {
-				avgTime+=num;
-			}
-			
-			System.out.println("Average time for " + numClients + ": " + avgTime);
 		}
+		
+		long avgTime = 0;
+		for (long num : times) {
+			avgTime+=num;
+		}
+		
+		System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 	}//end main
 }// end Class SimClient
