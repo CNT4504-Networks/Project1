@@ -42,6 +42,8 @@ public class RunSim {
 			avgTime+=num;
 		}
 		
+		avgTime = avgTime / numClients;
+		
 		System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 	}//end main
 }// end Class SimClient
