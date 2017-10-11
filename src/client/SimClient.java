@@ -26,7 +26,7 @@ public class SimClient implements Runnable {
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			
 			long startTime = System.currentTimeMillis();
-			out.println("1");
+			out.println("4");
 			out.println("[END]");
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			long stopTime = System.currentTimeMillis();
