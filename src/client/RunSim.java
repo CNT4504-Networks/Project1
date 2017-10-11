@@ -22,13 +22,14 @@ public class RunSim {
 		// Create the threads
 		for (int i = 0; i < numClients; i++) {
 			threads[i] = new Thread(new SimClient());
+			System.out.println("Creating thread: " + i);
 		}
 
 		long times[] = new long[numClients];
 		
 		//Start and join the clients
 		for (int i = 0; i < numClients; i++) {
-			System.out.println("Starting thread: " + i);
+			
 			threads[i].start();
 			System.out.println("Executing thread: " + i);
 			threads[i].join();
