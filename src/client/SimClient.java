@@ -29,6 +29,9 @@ class ClientThread implements Runnable {
     try {
       long startTime =System.currentTimeMillis();
       MainClient client = new MainClient();
+      //Change array arguments to meet test requirements then create jar file
+      //example {"192.168.100.107", "9000", "7", "1"};   will just execute 1(date/time) and 7 exit
+      //{"host name of server","port server is on", "args in descending order to execute"
       String arguments[] = {"192.168.100.107", "9000", "7", "4", "1"};
       client.main(arguments);
       long estimatedTime = System.currentTimeMillis() - startTime;
