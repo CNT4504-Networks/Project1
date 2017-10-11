@@ -33,6 +33,7 @@ public class RunSim {
 			threads[i].start();
 			threads[i].join();
 			times[i] = time;
+			System.out.println(time);
 		}
 		
 		long avgTime = 0;
