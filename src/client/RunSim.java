@@ -1,10 +1,11 @@
 package client;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RunSim {
 
-	public static long time;
+	public static ArrayList<Long> times = new ArrayList<>();
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// Need to do netstat & date command
@@ -24,16 +25,17 @@ public class RunSim {
 			threads[i] = new Thread(new SimClient());
 			System.out.println("Creating thread: " + i);
 		}
-
-		long times[] = new long[numClients];
 		
 		//Start and join the clients
-		for (int i = 0; i < numClients; i++) {
-			
+		for (int i = 0; i < numClients; i++) {	
 			threads[i].start();
+			
+			//times[i] = time;
+			//System.out.println(time);
+		}
+		
+		for (int i=0; i<numClients; i++) {
 			threads[i].join();
-			times[i] = time;
-			System.out.println(time);
 		}
 		
 		long avgTime = 0;
