@@ -25,11 +25,13 @@ public class SimClient implements Runnable {
 			// Dump the server hello
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			
+			System.out.println("Starting timer...");
 			long startTime = System.currentTimeMillis();
 			out.println("1");
 			out.println("[END]");
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			long stopTime = System.currentTimeMillis();
+			System.out.print("Stoping time");
 			RunSim.time = stopTime - startTime;
 			
 		} catch (UnknownHostException e) {

@@ -46,6 +46,11 @@ public class MainServer {
 							System.out.println("Client selected option: " + inputLine);
 							out.println(processInput(inputLine));
 							out.println("[END]");
+							
+							//
+							out.close();
+							in.close();
+							clientSock.close();
 						}
 
 						// Close all open connections
