@@ -11,7 +11,7 @@ public class SimClient implements Runnable {
 	@Override
 	public void run() {
 		// Connect to the server and wait
-		int port = 9000;
+		int port = 9800;
 		String ip = "192.168.100.107";
 
 		Socket sock;
