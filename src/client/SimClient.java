@@ -29,7 +29,7 @@ public class SimClient implements Runnable {
 			out.println("4");
 			out.println("[END]");
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	
-				System.out.println(serverMessage);
+				//System.out.println(serverMessage);
 			}
 			long stopTime = System.currentTimeMillis();
 			
