@@ -1,43 +1,41 @@
 package client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
-public class SimClient {
+public class SimClient implements Runnable {
+	@Override
+	public void run() {
+		// Connect to the server and wait
+		int port = 9000;
+		String ip = "192.168.100.107";
 
-  public static void main(String[] args) throws IOException {
-    //Need to do netstat & date command
-	  
-    if(args.length != 1) {
-      System.err.println("You must enter the number of simulations to run");
-      System.err.println("Usage: java -jar simClient.jar <number of clients>");
-      System.exit(1);
-    }
+		Socket sock;
+		try {
+			sock = new Socket(ip, port);
+			PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
+			BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			
+			String serverMessage;
 
-    int numClients = Integer.parseInt(args[0]);
-    Thread newThread;
-    System.out.println("New Thread");
-    for (int i = 0; i < numClients; i++) {  	
-      newThread = new Thread(new ClientThread());
-      newThread.start();   
-    }    
-   }
-}//end Class SimClient
-
-class ClientThread implements Runnable {
-  public void run() {
-    System.out.println("New Thread");
-    try {
-      long startTime =System.currentTimeMillis();
-      MainClient client = new MainClient();
-      //Change array arguments to meet test requirements then create jar file
-      //example {"192.168.100.107", "9000", "7", "1"};   will just execute 1(date/time) and 7 exit
-      //{"host name of server","port server is on", "args in descending order to execute"
-      String arguments[] = {"192.168.100.107", "9000", "7", "4", "1"};
-      client.main(arguments);
-      long estimatedTime = System.currentTimeMillis() - startTime;
-      System.out.println(estimatedTime + " Milliseconds to complete");
-    } catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
-  }
+			// Dump the server hello
+			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
+			
+			long startTime = System.currentTimeMillis();
+			out.println("1");
+			out.println("[END]");
+			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
+			long stopTime = System.currentTimeMillis();
+			RunSim.time = stopTime - startTime;
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
