@@ -21,11 +21,13 @@ public class SimClient implements Runnable {
 			BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			
 			String serverMessage;
+			
+			long startTime = System.currentTimeMillis();
 
 			// Dump the server hello
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			
-			long startTime = System.currentTimeMillis();
+			
 			out.println("4");
 			out.println("[END]");
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	
