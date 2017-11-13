@@ -28,7 +28,7 @@ public class SimClient implements Runnable {
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	}
 			
 			
-			out.println("4");
+			out.println("1");
 			out.println("[END]");
 			while (!(serverMessage = in.readLine()).equals("[END]")) {	
 				//System.out.println(serverMessage);
