@@ -29,8 +29,8 @@ public class MainServer {
 				// Listen for client connection (can only accept 1 at a time)
 				Socket clientSock = serverSock.accept();
 				System.out.println("Accepting new client!");
-				ServerThread thread = new ServerThread(clientSock);
-				thread.run();
+				Thread thread = new Thread(new ServerThread(clientSock));
+				thread.start();
 				System.out.print("test");
 			} // end main program loop
 		} catch (IOException e) {
