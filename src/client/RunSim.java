@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 public class RunSim {
 
-	public static ArrayList<Long> times;
+	public static ArrayList<Long> times = new ArrayList<>();
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// Need to do netstat & date command
-		times = new ArrayList<>();
-		
+
 		if (args.length != 1) {
 			System.err.println("You must enter the number of simulations to run");
 			System.err.println("Usage: java -jar simClient.jar <number of clients>");
@@ -36,19 +35,18 @@ public class RunSim {
 		}
 		
 		for (int i=0; i<numClients; i++) {
+			if(threads[i] != null) {
 			threads[i].join();
-		}
-		
-		if(times != null) {
-			long avgTime = 0;
-			for (long num : times) {
-				avgTime+=num;
 			}
-			
-			avgTime = avgTime / numClients;
-			
-			System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 		}
 		
+		long avgTime = 0;
+		for (long num : times) {
+			avgTime+=num;
+		}
+		
+		avgTime = avgTime / numClients;
+		
+		System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 	}//end main
 }// end Class SimClient
