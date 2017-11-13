@@ -33,7 +33,7 @@ public class ServerThread implements Runnable {
 					if (inputLine != null && !inputLine.equals("[END]")) {
 						//System.out.println("Client selected option: " + inputLine);
 						// coutn to a million
-						for(int i=0; i<100; i++) { out.println(i); }
+						for(int i=0; i<10000; i++) { out.println(i); }
 						out.println(processInput(inputLine));
 						out.println("[END]");
 					}
