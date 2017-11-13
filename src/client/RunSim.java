@@ -39,13 +39,16 @@ public class RunSim {
 			threads[i].join();
 		}
 		
-		long avgTime = 0;
-		for (long num : times) {
-			avgTime+=num;
+		if(times != null) {
+			long avgTime = 0;
+			for (long num : times) {
+				avgTime+=num;
+			}
+			
+			avgTime = avgTime / numClients;
+			
+			System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 		}
 		
-		avgTime = avgTime / numClients;
-		
-		System.out.println("Average time for " + numClients + ": " + avgTime + "ms");
 	}//end main
 }// end Class SimClient
