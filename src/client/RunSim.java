@@ -2,10 +2,12 @@ package client;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RunSim {
 
-	public static ArrayList<Long> times = new ArrayList<>();
+	public static List<Long> times = Collections.synchronizedList(new ArrayList<Long>());
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// Need to do netstat & date command
@@ -35,14 +37,16 @@ public class RunSim {
 		}
 		
 		for (int i=0; i<numClients; i++) {
-			if(threads[i] != null) {
 			threads[i].join();
-			}
 		}
 		
 		long avgTime = 0;
-		for (long num : times) {
-			avgTime+=num;
+		
+		
+		synchronized (times) {
+			for (long num : times) {
+				avgTime+=num;
+			}
 		}
 		
 		avgTime = avgTime / numClients;
