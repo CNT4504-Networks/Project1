@@ -31,6 +31,7 @@ public class MainServer {
 				System.out.println("Accepting new client!");
 				ServerThread thread = new ServerThread(clientSock);
 				thread.run();
+				System.out.print("test");
 			} // end main program loop
 		} catch (IOException e) {
 			System.out.println("Exception caught while trying to listen on port " + portNumber);
