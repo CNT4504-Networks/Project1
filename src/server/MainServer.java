@@ -26,9 +26,10 @@ public class MainServer {
 		try (ServerSocket serverSock = new ServerSocket(portNumber);) {
 			// Main program loop
 			while (true) {
-				System.out.println("Waiting for client connection...");
+				
 				// Listen for client connection (can only accept 1 at a time)
 				Socket clientSock = serverSock.accept();
+				System.out.println("Accepting new client!");
 				ServerThread thread = new ServerThread(clientSock);
 				thread.run();
 			} // end main program loop

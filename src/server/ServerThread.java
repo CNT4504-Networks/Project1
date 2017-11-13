@@ -22,7 +22,7 @@ public class ServerThread implements Runnable {
 			String inputLine;
 
 			// notify the client that we have connected
-			System.out.println("Client connected!");
+			//System.out.println("Client connected!");
 			out.println("Connection established.");
 			out.println("[END]");
 
@@ -31,7 +31,7 @@ public class ServerThread implements Runnable {
 					// Process user input
 					inputLine = in.readLine();
 					if (inputLine != null && !inputLine.equals("[END]")) {
-						System.out.println("Client selected option: " + inputLine);
+						//System.out.println("Client selected option: " + inputLine);
 						out.println(processInput(inputLine));
 						out.println("[END]");
 					}
