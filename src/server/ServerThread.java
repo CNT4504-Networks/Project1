@@ -49,7 +49,7 @@ public class ServerThread implements Runnable {
 			} // end client connection loop
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
