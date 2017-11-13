@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 public class RunSim {
 
-	public static ArrayList<Long> times = new ArrayList<>();
+	public static ArrayList<Long> times;
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// Need to do netstat & date command
-
+		times = new ArrayList<>();
+		
 		if (args.length != 1) {
 			System.err.println("You must enter the number of simulations to run");
 			System.err.println("Usage: java -jar simClient.jar <number of clients>");
